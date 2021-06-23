@@ -19,9 +19,8 @@ pub fn bootstrap() -> Result<()> {
 }
 
 fn dependencies() -> Result<&'static Dependencies> {
-    DEPS.get().ok_or(anyhow!(
-        "Dependencies not initialized. Did the app call bootstrap?"
-    ))
+    DEPS.get()
+        .ok_or_else(|| anyhow!("Dependencies not initialized. Did the app call bootstrap?"))
 }
 
 pub fn get_infos(address: &Address) -> Result<AccountViewData> {
